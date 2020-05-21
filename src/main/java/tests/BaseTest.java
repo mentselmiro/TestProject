@@ -31,6 +31,8 @@ public class BaseTest {
         assertEquals(PersonalLeavesPage.TITLE_TEXT, personalLeavesPage.getTitle());
     }
 
+
+
     @AfterAll
     public static void theEnd() {
         ApplicationConfig.getDriver().quit();

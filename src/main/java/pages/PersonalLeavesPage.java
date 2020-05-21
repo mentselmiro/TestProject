@@ -1,6 +1,7 @@
 package pages;
 
 import elements.LeavesTable;
+import elements.NotificationMessage;
 import org.openqa.selenium.By;
 
 import static config.ApplicationConfig.getDriver;
@@ -11,6 +12,9 @@ public class PersonalLeavesPage {
     String TITLE = "//h2[contains(text(),'Personal leaves')]";
     public static String  TITLE_TEXT = "Personal leaves";
     String REMAINING_DAYS_XPATH = "//div[contains(text(),'Remaining')]/strong";
+
+    NotificationMessage notifyMessage = new NotificationMessage();
+
 
     LeavesTable leavesTable = new LeavesTable();
 
@@ -30,6 +34,10 @@ public class PersonalLeavesPage {
     public int getRemainingDays() {
         String remainingDays = getDriver().findElement(By.xpath(REMAINING_DAYS_XPATH)).getText();
         return Integer.valueOf(remainingDays);
+    }
+
+    public NotificationMessage getNotifyMessage() {
+        return null;
     }
 }
 

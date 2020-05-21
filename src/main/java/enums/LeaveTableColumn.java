@@ -6,7 +6,7 @@ public enum LeaveTableColumn {
     DAYS("Days"),
     DAYS_OFF("Days off"),
     STATUS("Status"),
-    ACTIONS ("Action");
+    ACTIONS ("Actions");
 
     String name;
 
