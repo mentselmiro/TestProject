@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeleteLeaveModal extends AbstractModal {
 
-    String YES_BUTTON_XPATH ="//mat-dialog-container//button[contains(text(), 'Yes')]";
+    String YES_BUTTON_XPATH = "//button[contains(text(),'Yes')]";
     String NO_BUTTON_XPATH = "//mat-dialog-container//button[contains(text(), 'No')]";
     String MODAL_XPATH = "//mat-dialog-container//h2[contains(text(), 'Delete')]";
 
@@ -22,6 +22,7 @@ public class DeleteLeaveModal extends AbstractModal {
         getDriver().findElement(By.xpath(YES_BUTTON_XPATH)).click();
 
     }
+
 
 }
 

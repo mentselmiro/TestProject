@@ -12,6 +12,7 @@ public class PersonalLeavesPage {
     String TITLE = "//h2[contains(text(),'Personal leaves')]";
     public static String  TITLE_TEXT = "Personal leaves";
     String REMAINING_DAYS_XPATH = "//div[contains(text(),'Remaining')]/strong";
+    String DELETE_BUTTON_XPATH = "//tr[2]//td[6]//button[3]";
 
     NotificationMessage notifyMessage = new NotificationMessage();
 
@@ -37,7 +38,20 @@ public class PersonalLeavesPage {
     }
 
     public NotificationMessage getNotifyMessage() {
-        return null;
+        try {
+            notifyMessage.getAlertText();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return notifyMessage;
+    }
+    public boolean isVisible(){
+       return getDriver().findElement(By.xpath(DELETE_BUTTON_XPATH)).isDisplayed();
+
+    }
+
+    public void clickDeleteButton(){
+        getDriver().findElement(By.xpath(DELETE_BUTTON_XPATH)).click();
     }
 }
 

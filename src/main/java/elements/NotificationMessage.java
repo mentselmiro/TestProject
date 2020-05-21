@@ -13,7 +13,10 @@ public class NotificationMessage {
 
 
 
-    public String getAlertText(){
+    public String getAlertText() throws InterruptedException {
+        Thread.sleep(1000);
+        String bomb = getDriver().findElement(By.xpath(SUCCESS_ALERT_XPATH)).getText();
+        System.out.println(bomb + "  <= HONOLULULU");
         return getDriver().findElement(By.xpath(SUCCESS_ALERT_XPATH)).getText();
     }
 

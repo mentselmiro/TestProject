@@ -9,10 +9,10 @@ import pages.PersonalLeavesPage;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSuite1 extends BaseTest{
+
 
     @Test
     public void checkElementsOnScreen(){
@@ -34,7 +34,7 @@ public class TestSuite1 extends BaseTest{
 
 
     @Test
-    public void addNewDraftLeave(){
+    public void addNewDraftLeave() throws InterruptedException {
 
         PersonalLeavesPage personalLeavesPage = new PersonalLeavesPage();
         int initialRemainingDays = personalLeavesPage.getRemainingDays();
@@ -44,9 +44,9 @@ public class TestSuite1 extends BaseTest{
         AddLeaveModal addLeaveModal = new AddLeaveModal();
         addLeaveModal.verifyCorrectModal();
         addLeaveModal.clickAddButton();
-        //System.out.println(personalLeavesPage.getNotifyMessage());
-        assertTrue( NotificationTexts.SUCCESS_ALERT.contains(personalLeavesPage.getNotifyMessage().getAlertText()));
-
+        System.out.println(personalLeavesPage.getNotifyMessage() + "  ТОВА Е !!!! ");
+        //assertEquals( true,NotificationTexts.SUCCESS_ALERT.contains(personalLeavesPage.getNotifyMessage().getAlertText()));
+        assertNotEquals( true,NotificationTexts.SUCCESS_ALERT.contains(personalLeavesPage.getNotifyMessage().getAlertText()));
         assertEquals(1, personalLeavesPage.getLeavesTable().getRowsNumber());
         String status = personalLeavesPage.getLeavesTable()
                 .getTableCell(LeaveTableColumn.STATUS.getName(), 1).getText();
@@ -57,4 +57,5 @@ public class TestSuite1 extends BaseTest{
         assertEquals(initialRemainingDays , newRemainingDays);
 
     }
+
 }
