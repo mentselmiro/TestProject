@@ -23,10 +23,35 @@ public class AddLeaveModal extends AbstractModal {
        assertTrue(isDisplayed);
     }
 
+    public boolean isFromFieldVisible (){
+        return  getDriver().findElement(By.id(FROM_FIELD_ID)).isDisplayed();
+    }
+    public boolean isToFieldVisible (){
+        return getDriver().findElement(By.id(TO_FIELD_ID)).isDisplayed();
+    }
+    public boolean isFromCalendarVisible (){
+        return getDriver().findElement(By.xpath(FROM_CALENDAR)).isDisplayed();
+    }
+    public boolean isToCalendarVisible(){
+        return getDriver().findElement(By.xpath(TO_CALENDAR)).isDisplayed();
+    }
+    public boolean isDaysVisible (){
+        return getDriver().findElement(By.xpath(DAYS_XPATH)).isDisplayed();
+    }
+    public boolean isDateOffVisible(){
+        return getDriver().findElement(By.xpath(DAYS_OFF_XPATH)).isDisplayed();
+    }
+    public boolean isAddButtonVisible(){
+        return getDriver().findElement(By.xpath(ADD_BUTTON_XPATH)).isDisplayed();
+    }
+    public boolean isCancelButtonVisible(){
+        return getDriver().findElement(By.xpath(CANCEL_BUTTON_XPATH)).isDisplayed();
+    }
     public void clickAddButton() {
         getDriver().findElement(By.xpath(ADD_BUTTON_XPATH)).click();
-
     }
-
+    public void clickCancelButton(){
+        getDriver().findElement(By.xpath(CANCEL_BUTTON_XPATH)).click();
+    }
 }
 

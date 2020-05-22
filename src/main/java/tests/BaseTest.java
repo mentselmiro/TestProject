@@ -3,7 +3,6 @@ package tests;
 import config.ApplicationConfig;
 import config.Credentials;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import pages.DeleteLeaveModal;
 import pages.LoginPage;
@@ -24,9 +23,7 @@ public class BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
-
     public static void login() throws InterruptedException {
         LoginPage loginPage = new LoginPage();
         loginPage.login(Credentials.EMAIL, Credentials.PASSWORD);
@@ -36,22 +33,17 @@ public class BaseTest {
 
 
     }
-
-    @AfterEach
-    public void DeleteItems() throws InterruptedException {
+    @AfterAll
+    public static void deleteItems() throws InterruptedException {
 
         PersonalLeavesPage personalLeavesPage = new PersonalLeavesPage();
         DeleteLeaveModal deleteLeaveModal = new DeleteLeaveModal();
-        while (personalLeavesPage.isVisible()) {
+        while (!personalLeavesPage.isTableEmpty()) {
             personalLeavesPage.clickDeleteButton();
-            Thread.sleep(500);
             deleteLeaveModal.clickYesButton();
-            Thread.sleep(500);
         }
-
+        theEnd();
     }
-
-    @AfterAll
     public static void theEnd() {
         getDriver().quit();
 

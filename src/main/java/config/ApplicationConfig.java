@@ -30,9 +30,6 @@ public class ApplicationConfig {
         }
 
     }
-
-
-
     public static WebDriver getDriver(){
         return driver;
     }

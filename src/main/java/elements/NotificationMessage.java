@@ -10,13 +10,8 @@ public class NotificationMessage {
     String EDIT_ALERT_XPATH = "//div[@class='alert alert-success']";
 
 
-
-
-
     public String getAlertText() throws InterruptedException {
-        Thread.sleep(1000);
-        String bomb = getDriver().findElement(By.xpath(SUCCESS_ALERT_XPATH)).getText();
-        System.out.println(bomb + "  <= HONOLULULU");
+        Thread.sleep(500);
         return getDriver().findElement(By.xpath(SUCCESS_ALERT_XPATH)).getText();
     }
 

@@ -1,6 +1,7 @@
 package tests;
 
 import constants.NotificationTexts;
+import constants.TeamLeavesText;
 import elements.LeavesTable;
 import enums.LeaveTableColumn;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,8 @@ import pages.PersonalLeavesPage;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestSuite1 extends BaseTest{
 
@@ -20,16 +22,30 @@ public class TestSuite1 extends BaseTest{
         LeavesTable spreadsheet = new LeavesTable();
         List<String> tableHeaders = spreadsheet.getTableHeaders();
         for (LeaveTableColumn column :LeaveTableColumn.values()) {
-            //System.out.println("" +column.getName() + " headeers: " + tableHeaders.toString());
             assertTrue(tableHeaders.contains(column.getName()));
         }
 
-
+        LeavesTable teamText = new LeavesTable();
+        assertEquals(true,personalLeavesPage.getTeamLeavesText().contains(TeamLeavesText.TEAM_LEAVES_TEXT));
+        assertTrue(personalLeavesPage.isAddButtonDisplayed());
     }
 
     @Test
-    public void checkElementsOnDateModal(){
-
+    public void checkElementsOnDateModal() throws InterruptedException {
+        PersonalLeavesPage personalLeavesPage = new PersonalLeavesPage();
+        personalLeavesPage.clickAddButton();
+        Thread.sleep(1000);
+        AddLeaveModal addLeaveModal = new AddLeaveModal();
+        addLeaveModal.verifyCorrectModal();
+        assertTrue(addLeaveModal.isAddButtonVisible());
+        assertTrue(addLeaveModal.isCancelButtonVisible());
+        assertTrue(addLeaveModal.isToFieldVisible());
+        assertTrue(addLeaveModal.isFromFieldVisible());
+        assertTrue(addLeaveModal.isToCalendarVisible());
+        assertTrue(addLeaveModal.isFromCalendarVisible());
+        assertTrue(addLeaveModal.isDaysVisible());
+        assertTrue(addLeaveModal.isDateOffVisible());
+        addLeaveModal.clickCancelButton();
     }
 
 
@@ -37,23 +53,23 @@ public class TestSuite1 extends BaseTest{
     public void addNewDraftLeave() throws InterruptedException {
 
         PersonalLeavesPage personalLeavesPage = new PersonalLeavesPage();
-        int initialRemainingDays = personalLeavesPage.getRemainingDays();
+        int initialRemainingDays = personalLeavesPage.getRemainingDays();//This takes the remaining days value
 
         personalLeavesPage.clickAddButton();
-
         AddLeaveModal addLeaveModal = new AddLeaveModal();
-        addLeaveModal.verifyCorrectModal();
+        addLeaveModal.verifyCorrectModal(); //validates the Add modal
         addLeaveModal.clickAddButton();
-        System.out.println(personalLeavesPage.getNotifyMessage() + "  ТОВА Е !!!! ");
-        //assertEquals( true,NotificationTexts.SUCCESS_ALERT.contains(personalLeavesPage.getNotifyMessage().getAlertText()));
-        assertNotEquals( true,NotificationTexts.SUCCESS_ALERT.contains(personalLeavesPage.getNotifyMessage().getAlertText()));
+
+        assertEquals( true,personalLeavesPage
+                .getNotifyMessage().getAlertText().contains(NotificationTexts.SUCCESS_ALERT));
+
         assertEquals(1, personalLeavesPage.getLeavesTable().getRowsNumber());
         String status = personalLeavesPage.getLeavesTable()
                 .getTableCell(LeaveTableColumn.STATUS.getName(), 1).getText();
         assertEquals("Draft", status);
 
 
-        int newRemainingDays = personalLeavesPage.getRemainingDays();
+        int newRemainingDays = personalLeavesPage.getRemainingDays(); //This counts the days next to "Remaining: "
         assertEquals(initialRemainingDays , newRemainingDays);
 
     }
