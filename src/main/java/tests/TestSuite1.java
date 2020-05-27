@@ -45,6 +45,8 @@ public class TestSuite1 extends BaseTest{
         assertTrue(addLeaveModal.isFromCalendarVisible());
         assertTrue(addLeaveModal.isDaysVisible());
         assertTrue(addLeaveModal.isDateOffVisible());
+        assertEquals(addLeaveModal.currentDate(), addLeaveModal.toDate());
+        assertEquals(addLeaveModal.currentDate(),addLeaveModal.fromDate());
         addLeaveModal.clickCancelButton();
     }
 

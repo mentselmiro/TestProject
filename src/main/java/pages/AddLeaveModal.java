@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static config.ApplicationConfig.getDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -37,6 +40,9 @@ public class AddLeaveModal extends AbstractModal {
     }
     public boolean isDaysVisible (){
         return getDriver().findElement(By.xpath(DAYS_XPATH)).isDisplayed();
+    public boolean isDaysOne(){
+        return getDriver().findElement(By.xpath(DAYS_XPATH)).getAttribute();
+        }
     }
     public boolean isDateOffVisible(){
         return getDriver().findElement(By.xpath(DAYS_OFF_XPATH)).isDisplayed();
@@ -52,6 +58,23 @@ public class AddLeaveModal extends AbstractModal {
     }
     public void clickCancelButton(){
         getDriver().findElement(By.xpath(CANCEL_BUTTON_XPATH)).click();
+    }
+
+    public String currentDate(){
+        String pattern =    "M/dd/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+        System.out.println(date);
+        return date;
+
+    }
+    public String fromDate() {
+        String fromDate = getDriver().findElement(By.id(FROM_FIELD_ID)).getAttribute("value");
+        return fromDate;
+    }
+    public String toDate() {
+        String toDates = getDriver().findElement(By.id(TO_FIELD_ID)).getAttribute("value");
+        return toDates;
     }
 }
 
